@@ -5,11 +5,37 @@
 var DatePicked;
 var fileContentArray=[];
 var TLEFileSelected;
- function redrawOnDemand(dt){
+var DisplayOptions="DEBS";
+
+function redrawOnDemand(dt){
     DatePicked=document.getElementById("debrisDT").value;
     DatePicked=String(DatePicked);
     DatePicked= new Date(DatePicked);
 }
+// function updateDisplayOption(){
+//     if (document.getElementById("SATS").checked){
+//         DisplayOptions="SATS";
+//     }
+//     if (document.getElementById("DEBS").checked){
+//         DisplayOptions="DEBS";
+//     }
+//     if (document.getElementById("BOTH").checked){
+//         DisplayOptions="BOTH";
+//     }
+
+
+// }
+
+function LoadFile() {
+    var oFrame = document.getElementById("frmFile");
+    var strRawContents = oFrame.contentWindow.document.body.childNodes[0].innerHTML;
+    // updateDisplayOption();
+    fileContentArray = strRawContents.split(/\r\n|\n/);
+    TLEFileSelected=true;
+    
+}
+
+
 
 function previewFile() {
     const preview = document.querySelector('txt');
@@ -130,7 +156,7 @@ requirejs(['./WorldWindShim',
            
         //Show Satellite animation
         var timeIndex = 0;
-        var animationStep = 10;
+        var animationStep = 5000;
         function animateTimeSeries() {
 
 
@@ -205,6 +231,7 @@ requirejs(['./WorldWindShim',
 
 
                 placemarkLayer.addRenderable(sat[i]);
+                
 
 
             }
@@ -307,21 +334,8 @@ requirejs(['./WorldWindShim',
 
 
         function readTLEDataFile(){
-            // const reader = new FileReader();
-            // var file = new File(["foo"], "Data_2.txt", {
-            //     type: "text/plain",
-            //   });
 
-
-            // reader.addEventListener("load", function () {
-            // fileContentArray = reader.result.split(/\r\n|\n/);
-            //     }, false);
-  
-            // if (file) {
-            //     reader.readAsText(file);
-            // }
-  
-    
+ 
 
             if (fileContentArray.length <= 0) 
             {
@@ -345,19 +359,46 @@ requirejs(['./WorldWindShim',
                 var line = 0;
                 while (line <= fileContentArray.length-1)
                 {
-                    
-                    //console.log(line + " --> " + fileContentArray[line]);
-                    satName[satCounter] = fileContentArray[line];
-                    satTLE1[satCounter] = fileContentArray[line+1];
-                    satTLE2[satCounter] = fileContentArray[line+2];    
-                    satCounter++;
+                    if (DisplayOptions=='BOTH'){
+                        satName[satCounter] = fileContentArray[line];
+                        satTLE1[satCounter] = fileContentArray[line+1];
+                        satTLE2[satCounter] = fileContentArray[line+2];    
+                        satCounter++;
+
+                    }
+                    if (DisplayOptions=='SATS'){
+                        //console.log(line + " --> " + fileContentArray[line]);
+                        if (fileContentArray[line].indexOf("DEB") < 0 ) {
+                            satName[satCounter] = fileContentArray[line];
+                            satTLE1[satCounter] = fileContentArray[line+1];
+                            satTLE2[satCounter] = fileContentArray[line+2];    
+                            satCounter++;
+                        }
+ 
+                    }
+
+                    if (DisplayOptions=='DEBS'){
+                        //console.log(line + " --> " + fileContentArray[line]);
+                        if (fileContentArray[line].indexOf("DEB") < 0 ) {
+
+                        }
+                        else //debries
+                        {
+                            satName[satCounter] = fileContentArray[line];
+                            satTLE1[satCounter] = fileContentArray[line+1];
+                            satTLE2[satCounter] = fileContentArray[line+2];    
+                            satCounter++;
+                        }
+                    }
+
+
                     line= line + 3;
                 }
                 return satCounter;
 
             }    
 
-                
+     
 
                  
               
