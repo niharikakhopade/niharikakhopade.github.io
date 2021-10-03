@@ -68,6 +68,7 @@ requirejs(['./WorldWindShim',
         // Define the images we'll use for the placemarks.
         var images = [
             "G1.png",
+            "sat.png"
         ];
 
         var pinLibrary = WorldWind.configuration.baseUrl + "images/pushpins/", // location of the image files
@@ -129,7 +130,7 @@ requirejs(['./WorldWindShim',
            
         //Show Satellite animation
         var timeIndex = 0;
-        var animationStep = 200;
+        var animationStep = 10;
         function animateTimeSeries() {
 
 
@@ -137,7 +138,7 @@ requirejs(['./WorldWindShim',
             timeIndex = ++timeIndex;
             //calling read TLE and Satellite one more time if the TLE files is selected
             if (TLEFileSelected) 
-            {
+            {   
                 TLEFileSelected = false;
                 n=readTLEDataFile();        
                 createSatelites(n);
@@ -170,15 +171,30 @@ requirejs(['./WorldWindShim',
 
 
                sat[i].altitudeMode = WorldWind.RELATIVE_TO_GROUND;
-               sat[i].imageSource= pinLibrary + images[0];
+
+
+            
+               
                 //placemark.targetVisibility =0;
                 // Create the placemark attributes for this placemark. Note that the attributes differ only by their
                 // image URL.
                 satAttrib[i] = new WorldWind.PlacemarkAttributes(placemarkAttributes);
-                satAttrib[i].imageSource = pinLibrary + images[0];
+                // satAttrib[i].imageSource = pinLibrary + images[0];
+
+                if (satName[i].indexOf("DEB") < 0 ) {
+                    sat[i].imageSource= pinLibrary + images[1];
+                    satAttrib[i].imageSource = pinLibrary + images[1];
+                }
+                else{
+                    sat[i].imageSource= pinLibrary + images[0];
+                    satAttrib[i].imageSource = pinLibrary + images[0];
+                }
+
                 satAttrib[i].drawLeaderLine=false;
                 satAttrib[i].imageColor =  WorldWind.Color.WHITE;
                 
+
+
                 //placemarkAttributes.imageScale=1;
                 sat[i].attributes = satAttrib[i];
                 // Add the placemark to the layer.
@@ -311,7 +327,7 @@ requirejs(['./WorldWindShim',
             {
                 //if no file chose show two satellites             
                 
-                satName[0] = 'Debris X'
+                satName[0] = 'DEBris X'
                 satTLE1[0] = '1 25544U 98067A   19156.50900463  .00003075  00000-0  59442-4 0  9992',
                 satTLE2[0] = '2 25544  51.6433  59.2583 0008217  16.4489 347.6017 15.51174618173442';    
                 
