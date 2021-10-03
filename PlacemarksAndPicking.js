@@ -45,7 +45,7 @@ requirejs(['./WorldWindShim',
         var wwd = new WorldWind.WorldWindow("canvasOne");
         wwd.navigator.lookAtLocation.latitude = 19.07;
         wwd.navigator.lookAtLocation.longitude = 73.37;
-        wwd.navigator.range = 8e7; 
+        wwd.navigator.range = 2e7; 
         // Create and add layers to the WorldWindow.
         var layers = [
             // Imagery layers.
