@@ -45,7 +45,7 @@ requirejs(['./WorldWindShim',
         var wwd = new WorldWind.WorldWindow("canvasOne");
         wwd.navigator.lookAtLocation.latitude = 19.07;
         wwd.navigator.lookAtLocation.longitude = 73.37;
-        wwd.navigator.range = 2e6; 
+        wwd.navigator.range = 8e7; 
         // Create and add layers to the WorldWindow.
         var layers = [
             // Imagery layers.
@@ -243,8 +243,8 @@ requirejs(['./WorldWindShim',
             else
                 gmst = satellite.gstime(new Date());
             
-            console.log('Datepicked  ' +  DatePicked + ' new date ' + new Date()) // Output: 2020-07-21 07:24:06.
-            console.log('gmst ' +  gmst) // Output: 2020-07-21 07:24:06.
+            // console.log('Datepicked  ' +  DatePicked + ' new date ' + new Date()) // Output: 2020-07-21 07:24:06.
+            // console.log('gmst ' +  gmst) // Output: 2020-07-21 07:24:06.
 
             // console.log('Date Picked gmst ' + satellite.gstime(DatePicked) + '  Curr date gmst ' + satellite.gstime(new Date()));
             // console.log(Date());
@@ -280,8 +280,8 @@ requirejs(['./WorldWindShim',
             // //Assigning TLE coord to my satellite
             sat.latitude = latitudeDegTLE;
             sat.longitude = longitudeDegTLE;
-            sat.height = heightTLE;
-            // console.log(latitude + ' ' + longitude);
+            sat.height = heightTLE * 1000;
+            // console.log('lat ' + sat.latitude + ' long ' + sat.longitude + ' height ' + sat.height);
         }
 
 
