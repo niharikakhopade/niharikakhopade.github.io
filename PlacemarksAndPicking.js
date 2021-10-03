@@ -45,7 +45,7 @@ requirejs(['./WorldWindShim',
         var wwd = new WorldWind.WorldWindow("canvasOne");
         wwd.navigator.lookAtLocation.latitude = 19.07;
         wwd.navigator.lookAtLocation.longitude = 73.37;
-        wwd.navigator.range = 8e7; 
+        wwd.navigator.range = 2e7; 
         // Create and add layers to the WorldWindow.
         var layers = [
             // Imagery layers.
@@ -327,16 +327,16 @@ requirejs(['./WorldWindShim',
             {
                 //if no file chose show two satellites             
                 
-                satName[0] = 'DEBris X'
-                satTLE1[0] = '1 25544U 98067A   19156.50900463  .00003075  00000-0  59442-4 0  9992',
-                satTLE2[0] = '2 25544  51.6433  59.2583 0008217  16.4489 347.6017 15.51174618173442';    
+                // satName[0] = 'DEBris X'
+                // satTLE1[0] = '1 25544U 98067A   19156.50900463  .00003075  00000-0  59442-4 0  9992',
+                // satTLE2[0] = '2 25544  51.6433  59.2583 0008217  16.4489 347.6017 15.51174618173442';    
                 
-                //ISS Zarya
-                satName[1] = 'ISS Zarya'
-                satTLE1[1] = '1 25544U 98067A   21274.25816815  .00005249  00000-0  10377-3 0  9993',
-                satTLE2[1] = '2 25544  51.6450 178.2593 0004287  46.8394 104.8068 15.48887264305034';
+                // //ISS Zarya
+                // satName[1] = 'ISS Zarya'
+                // satTLE1[1] = '1 25544U 98067A   21274.25816815  .00005249  00000-0  10377-3 0  9993',
+                // satTLE2[1] = '2 25544  51.6450 178.2593 0004287  46.8394 104.8068 15.48887264305034';
 
-                return 2;
+                return 0;
             }
             else
             {
